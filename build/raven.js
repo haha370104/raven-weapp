@@ -28,6 +28,8 @@ var wrapMethod = function(console, level, callback) {
     var msg = '';
     try {
       msg = '' + args.join(' ');
+    } catch (e) {
+      msg = ''
     }
     var data = {level: sentryLevel, logger: 'console', extra: {arguments: args}};
 

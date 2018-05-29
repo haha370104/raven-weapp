@@ -2,7 +2,7 @@
   "name": "@youzan/raven-weapp",
   "version": "0.0.7",
   "description": "Sentry SDK for WeApp",
-  "main": "build/raven.js",
+  "main": "index.js",
   "scripts": {
     "build": "grunt build",
     "test": "echo \"Error: no test specified\" && exit 1"

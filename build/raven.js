@@ -27,7 +27,7 @@ var wrapMethod = function(console, level, callback) {
     var args = [].slice.call(arguments);
     var msg = '';
     try {
-      msg = '' + args.join(' ');
+      msg = '' + args.map(function(value) { return value.toString() }).join(' ');
     } catch (e) {
       msg = ''
     }

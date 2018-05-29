@@ -25,6 +25,7 @@ var wrapMethod = function(console, level, callback) {
 
   console[level] = function() {
     var args = [].slice.call(arguments);
+
     var msg = '';
     try {
       msg = '' + args.map(function(value) { return value.toString() }).join(' ');
@@ -125,7 +126,8 @@ function Raven() {
     stackTraceLimit: 50,
     autoBreadcrumbs: true,
     instrument: true,
-    sampleRate: 1
+    sampleRate: 1,
+    consoleLevel: ['debug', 'info', 'warn', 'error']
   };
   this._ignoreOnError = 0;
   this._isRavenInstalled = false;
@@ -1382,7 +1384,7 @@ Raven.prototype = {
         });
       };
 
-      each(['debug', 'info', 'warn', 'error', 'log'], function(_, level) {
+      each(this._globalOptions.consoleLevel, function(_, level) {
         wrapConsoleMethod(console, level, consoleMethodCallback);
       });
     }

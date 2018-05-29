@@ -64,7 +64,8 @@ function Raven() {
     stackTraceLimit: 50,
     autoBreadcrumbs: true,
     instrument: true,
-    sampleRate: 1
+    sampleRate: 1,
+    consoleLevel: ['debug', 'info', 'warn', 'error']
   };
   this._ignoreOnError = 0;
   this._isRavenInstalled = false;
@@ -1321,7 +1322,7 @@ Raven.prototype = {
         });
       };
 
-      each(['debug', 'info', 'warn', 'error', 'log'], function(_, level) {
+      each(this._globalOptions.consoleLevel, function(_, level) {
         wrapConsoleMethod(console, level, consoleMethodCallback);
       });
     }

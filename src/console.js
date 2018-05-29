@@ -13,7 +13,12 @@ var wrapMethod = function(console, level, callback) {
   console[level] = function() {
     var args = [].slice.call(arguments);
 
-    var msg = '' + args.join(' ');
+    var msg = '';
+    try {
+      msg = '' + args.map(function(value) { return value.toString() }).join(' ');
+    } catch (e) {
+      msg = ''
+    }
     var data = {level: sentryLevel, logger: 'console', extra: {arguments: args}};
 
     if (level === 'assert') {
